@@ -1,0 +1,109 @@
+<section class="card" aria-labelledby="form-title">
+  <p class="eyebrow">Étape 1 sur 2</p>
+  <h1 id="form-title">Vos informations</h1>
+  <p class="intro">Saisissez vos coordonnées pour afficher un récapitulatif.</p>
+  <p class="required-note">
+    Les champs marqués d'un astérisque (*) sont obligatoires.
+  </p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="field-grid">
+      <div class="field">
+        <label for="firstName">Prénom <span aria-hidden="true">*</span></label>
+        <input
+          id="firstName"
+          type="text"
+          formControlName="firstName"
+          autocomplete="given-name"
+          required
+          [attr.aria-invalid]="showError('firstName')"
+          [attr.aria-describedby]="showError('firstName') ? 'firstName-error' : null"
+        />
+        @if (showError('firstName')) {
+        <p id="firstName-error" class="error" role="alert">
+          Le prénom est obligatoire.
+        </p>
+        }
+      </div>
+
+      <div class="field">
+        <label for="lastName"
+          >Nom de famille <span aria-hidden="true">*</span></label
+        >
+        <input
+          id="lastName"
+          type="text"
+          formControlName="lastName"
+          autocomplete="family-name"
+          required
+          [attr.aria-invalid]="showError('lastName')"
+          [attr.aria-describedby]="showError('lastName') ? 'lastName-error' : null"
+        />
+        @if (showError('lastName')) {
+        <p id="lastName-error" class="error" role="alert">
+          Le nom de famille est obligatoire.
+        </p>
+        }
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="phone"
+        >Numéro de téléphone <span class="optional">(facultatif)</span></label
+      >
+      <input
+        id="phone"
+        type="tel"
+        formControlName="phone"
+        autocomplete="tel"
+        inputmode="numeric"
+        placeholder="6135550123"
+        [attr.aria-invalid]="showError('phone')"
+        [attr.aria-describedby]="showError('phone') ? 'phone-hint phone-error' : 'phone-hint'"
+      />
+      <p id="phone-hint" class="hint">
+        10 chiffres, sans espaces ni tirets. Les 1er et 4e chiffres doivent être
+        différents de 0.
+      </p>
+      @if (showError('phone')) {
+      <p id="phone-error" class="error" role="alert">
+        Le téléphone doit contenir 10 chiffres, avec les 1er et 4e chiffres
+        différents de 0.
+      </p>
+      }
+    </div>
+
+    <div class="field">
+      <label for="email"
+        >Email <span class="optional">(facultatif)</span></label
+      >
+      <input
+        id="email"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        placeholder="nom@exemple.com"
+        [attr.aria-invalid]="showError('email')"
+        [attr.aria-describedby]="showError('email') ? 'email-error' : null"
+      />
+      @if (showError('email')) {
+      <p id="email-error" class="error" role="alert">
+        Saisissez une adresse email valide, par exemple nom@exemple.com.
+      </p>
+      }
+    </div>
+
+    @if (submitted && form.invalid) {
+    <p class="alert" role="alert">
+      Veuillez corriger les champs indiqués avant de continuer.
+    </p>
+    }
+
+    <div class="actions">
+      <button type="submit" class="button">Soumettre</button>
+      <span class="hint"
+        >Vous pourrez modifier vos informations à l'étape suivante.</span
+      >
+    </div>
+  </form>
+</section>

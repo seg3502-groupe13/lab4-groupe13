@@ -1,0 +1,41 @@
+<section class="card" aria-labelledby="summary-title">
+  <p class="eyebrow">Étape 2 sur 2</p>
+  <h1 id="summary-title">Informations soumises</h1>
+  <p class="intro">Vos informations sont valides. Voici votre récapitulatif.</p>
+
+  @if (user(); as details) {
+  <table>
+    <caption>
+      Informations de l'utilisateur
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Champ</th>
+        <th scope="col">Valeur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Prénom</th>
+        <td>{{ details.firstName }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Nom de famille</th>
+        <td>{{ details.lastName }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Numéro de téléphone</th>
+        <td>{{ details.phone || 'Non fourni' }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Email</th>
+        <td>{{ details.email || 'Non fourni' }}</td>
+      </tr>
+    </tbody>
+  </table>
+  }
+
+  <div class="actions">
+    <a routerLink="/form" class="button">Modifier les informations</a>
+  </div>
+</section>
